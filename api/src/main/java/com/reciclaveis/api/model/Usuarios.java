@@ -37,6 +37,9 @@ public class Usuarios {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date data = new java.sql.Date(System.currentTimeMillis());
 
+	@NotNull
+	private boolean cooperativa;
+	
 	
 	@NotNull
 	@Size(min = 3, max = 20)
@@ -64,6 +67,14 @@ public class Usuarios {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isCooperativa() {
+		return cooperativa;
+	}
+
+	public void setCooperativa(boolean cooperativa) {
+		this.cooperativa = cooperativa;
 	}
 
 	public String getSenha() {

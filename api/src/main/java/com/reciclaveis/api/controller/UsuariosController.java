@@ -22,39 +22,40 @@ import com.reciclaveis.api.repository.UsuariosRepository;
 @RequestMapping("/usuarios")
 @CrossOrigin("*")
 public class UsuariosController {
-	
-	//Importar o repositorio Jpa criado
+
+	// Importar o repositorio Jpa criado
 	@Autowired
 	private UsuariosRepository usuariosRepository;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Usuarios>> pegarUsuarios(){
+	public ResponseEntity<List<Usuarios>> pegarUsuarios() {
 		return ResponseEntity.ok(usuariosRepository.findAll());
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Usuarios> GetById(@PathVariable Long id){
+	public ResponseEntity<Usuarios> GetById(@PathVariable Long id) {
 		return usuariosRepository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+
+	@GetMapping("/nomeCooperativa")
+	public ResponseEntity<List<Usuarios>> GetByNomeCooperativa() {
+		return ResponseEntity.ok(usuariosRepository.findByCooperativaTrue());
+	}
+
 	@PostMapping
-	public ResponseEntity<Usuarios> post (@RequestBody Usuarios usuario)
-	{
+	public ResponseEntity<Usuarios> post(@RequestBody Usuarios usuario) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuariosRepository.save(usuario));
 	}
 
 	@PutMapping
-	public ResponseEntity<Usuarios> put (@RequestBody Usuarios usuario)
-	{
+	public ResponseEntity<Usuarios> put(@RequestBody Usuarios usuario) {
 		return ResponseEntity.status(HttpStatus.OK).body(usuariosRepository.save(usuario));
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
 		usuariosRepository.deleteById(id);
 	}
-	
-	
-	
+
 }
