@@ -37,9 +37,9 @@ public class Produtos {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date data = new java.sql.Date(System.currentTimeMillis());
 
-	//@ManyToOne
-	//@JsonIgnoreProperties("tb_produtos")
-	//private Tipo tipo;
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Tipo tipo;
 
 
 	public Long getId() {
@@ -82,7 +82,6 @@ public class Produtos {
 	}
 	
 
-	/*
 	public Tipo getTipo() {
 		return tipo;
 	}
@@ -92,7 +91,7 @@ public class Produtos {
 		this.tipo = tipo;
 	}
 
-	*/
+	
 		
 	
 }
