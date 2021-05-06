@@ -13,4 +13,6 @@ import com.reciclaveis.api.model.Usuarios;
 //Tudo que a gente vai colocar é o modelo (Usuarios e o tipo do ID)
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
+	public List<Usuarios>findByCooperativaTrue();
+	
 }
