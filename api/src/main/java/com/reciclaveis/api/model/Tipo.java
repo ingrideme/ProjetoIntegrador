@@ -29,9 +29,14 @@ public class Tipo
 	private Long id;
 	
 	
-	//@OneToMany(mappedBy = "tb_tipos", cascade = CascadeType.ALL)
-	//@JsonIgnoreProperties("tb_tipos")
-	//private List<Produtos> produto;
+	
+	/*MappedBy: falar quem é o dono da relação  
+	 Cascade: caso você apague uma tabela essa
+		ela apaga também a que está relacionada com ela
+	*/
+	@OneToMany(mappedBy = "tipo", cascade = CascadeType.ALL) 
+	@JsonIgnoreProperties("tipo") //ignorar atributos de uma classe na hora que for ler ela
+	private List<Produtos> produto;
 	
 	@NotNull
 	@Size(min = 3, max = 100)
