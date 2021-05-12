@@ -1,17 +1,23 @@
 package com.reciclaveis.api.model;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-
 import com.sun.istack.NotNull;
 
 // Notação @Entity para criação de tabela. Entidade = Tabela
@@ -44,10 +50,20 @@ public class Usuarios {
 
 	@NotNull
 	private boolean cooperativa;
-
+	
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String senha;
+	
+	@OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private List<Produtos> meusProdutosCriados = new ArrayList<>();
+	
+	@ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "vendas",
+			joinColumns = @JoinColumn(name = "comprador_id"),
+			inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	private List<Produtos> meusProdutosComprados =new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -104,4 +120,22 @@ public class Usuarios {
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
+
+	public List<Produtos> getMeusProdutosCriados() {
+		return meusProdutosCriados;
+	}
+
+	public void setMeusProdutosCriados(List<Produtos> meusProdutosCriados) {
+		this.meusProdutosCriados = meusProdutosCriados;
+	}
+
+	public List<Produtos> getMeusProdutosComprados() {
+		return meusProdutosComprados;
+	}
+
+	public void setMeusProdutosComprados(List<Produtos> meusProdutosComprados) {
+		this.meusProdutosComprados = meusProdutosComprados;
+	}
+	
+	
 }

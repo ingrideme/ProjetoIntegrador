@@ -1,12 +1,12 @@
 package com.reciclaveis.api.security;
 
 
-	import java.util.Collection;
-
+import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import com.reciclaveis.api.model.Usuarios;
+import java.util.List;
+
 
 	public class UserDetailsImpl implements UserDetails {
 
@@ -14,6 +14,7 @@ import com.reciclaveis.api.model.Usuarios;
 		
 		private String userName;
 		private String password;
+		private List<GrantedAuthority> authorities;
 		
 		public UserDetailsImpl(Usuarios user) {
 			this.userName = user.getCpfOuCnpj();
@@ -28,7 +29,7 @@ import com.reciclaveis.api.model.Usuarios;
 		@Override
 		public Collection<? extends GrantedAuthority> getAuthorities() {
 			// TODO Auto-generated method stub
-			return null;
+			return authorities;
 		}
 
 		@Override

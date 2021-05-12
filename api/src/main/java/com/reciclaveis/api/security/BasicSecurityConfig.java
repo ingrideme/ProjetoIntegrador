@@ -15,11 +15,11 @@ package com.reciclaveis.api.security;
 	public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		@Autowired
-		private UserDetailsService UserDetailsService;
+		private UserDetailsServiceImpl userDetailsService;
 		
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth) throws Exception  {
-			auth.userDetailsService(userDetailsService());
+			auth.userDetailsService (userDetailsService);
 		}
 		
 		@Bean
