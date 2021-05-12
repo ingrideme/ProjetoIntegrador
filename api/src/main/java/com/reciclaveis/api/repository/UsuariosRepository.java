@@ -1,6 +1,7 @@
 package com.reciclaveis.api.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,5 @@ import com.reciclaveis.api.model.Usuarios;
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
 	public List<Usuarios>findByCooperativaTrue();
-	
+	public Optional<Usuarios> findByUsuario(String usuario);
 }

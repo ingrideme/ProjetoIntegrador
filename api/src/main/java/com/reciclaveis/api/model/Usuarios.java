@@ -18,29 +18,33 @@ import com.sun.istack.NotNull;
 @Entity
 @Table(name = "tb_usuarios")
 public class Usuarios {
-	
-	//Data Notation para "avisar" pro entity especificações de cada atributo
+
+	// Data Notation para "avisar" pro entity especificações de cada atributo
 	@Id
-	//Notação para gerar automaticamente o id == AUTO_INCREMENT
+	// Notação para gerar automaticamente o id == AUTO_INCREMENT
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
 	@Size(min = 3, max = 45)
-	private String nome;
-	
+	private String nomeFisOuJuri;
+
 	@NotNull
-	//@Email
+	// @Email
 	@Size(min = 3, max = 45)
+
 	private String email;
-	
+
+	@NotNull
+	@Size(min = 12, max = 14) // desconsiderando pontos e traços / duvida front.
+	private String cpfOuCnpj;
+
 	@Temporal(TemporalType.TIMESTAMP)
-    private Date data = new java.sql.Date(System.currentTimeMillis());
+	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@NotNull
 	private boolean cooperativa;
-	
-	
+
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String senha;
@@ -53,12 +57,12 @@ public class Usuarios {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeFisOuJuri() {
+		return nomeFisOuJuri;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeFisOuJuri(String nomeFisOuJuri) {
+		this.nomeFisOuJuri = nomeFisOuJuri;
 	}
 
 	public String getEmail() {
@@ -67,6 +71,14 @@ public class Usuarios {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public boolean isCooperativa() {
@@ -85,14 +97,11 @@ public class Usuarios {
 		this.senha = senha;
 	}
 
-	public Date getData() {
-		return data;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
-	
-	
-	
 }
