@@ -1,11 +1,17 @@
 package com.reciclaveis.api.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.PrimitiveIterator;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,8 +46,16 @@ public class Produtos {
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Tipo tipo;
-
-
+	
+	//private Integer quantidade;
+	
+	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "criador")
+	private Usuarios usuarioCriador;
+	
+	@ManyToMany(mappedBy = "meusProdutosComprados", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private List<Usuarios> compradores = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -91,6 +105,27 @@ public class Produtos {
 		this.tipo = tipo;
 	}
 
+
+	public Usuarios getUsuarioCriador() {
+		return usuarioCriador;
+	}
+
+
+	public void setUsuarioCriador(Usuarios usuarioCriador) {
+		this.usuarioCriador = usuarioCriador;
+	}
+
+
+	public List<Usuarios> getCompradores() {
+		return compradores;
+	}
+
+
+	public void setCompradores(List<Usuarios> compradores) {
+		this.compradores = compradores;
+	}
+
+	
 	
 		
 	
