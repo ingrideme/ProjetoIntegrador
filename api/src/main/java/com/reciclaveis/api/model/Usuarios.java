@@ -41,6 +41,8 @@ public class Usuarios {
 	private boolean cooperativa;
 	
 	
+	//Colocar outros atributos de contato(telefone e etc)
+	
 	@NotNull
 	@Size(min = 3, max = 20)
 	private String senha;

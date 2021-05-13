@@ -10,4 +10,5 @@ import com.reciclaveis.api.model.Tipo;
 //Tudo que a gente vai colocar é o modelo (Tipo e o tipo do ID)
 public interface TipoRepository extends JpaRepository<Tipo, Long>{
 
+	//Fazer um buscar por categoria(tipo)
 }
