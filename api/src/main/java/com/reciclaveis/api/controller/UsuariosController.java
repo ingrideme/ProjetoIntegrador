@@ -1,6 +1,7 @@
 package com.reciclaveis.api.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reciclaveis.api.model.Usuarios;
+import com.reciclaveis.api.model.UsuariosLogin;
 import com.reciclaveis.api.repository.UsuariosRepository;
+import com.reciclaveis.api.service.UsuariosService;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -27,6 +30,14 @@ public class UsuariosController {
 	@Autowired
 	private UsuariosRepository usuariosRepository;
 
+	
+	@Autowired
+	private UsuariosService service;
+	
+	
+	
+	
+	
 	@GetMapping
 	public ResponseEntity<List<Usuarios>> pegarUsuarios() {
 		return ResponseEntity.ok(usuariosRepository.findAll());
@@ -58,4 +69,15 @@ public class UsuariosController {
 		usuariosRepository.deleteById(id);
 	}
 
+	@PostMapping("/logar")
+	public ResponseEntity<UsuariosLogin> Autentication(@RequestBody Optional<UsuariosLogin> user) {
+		return service.Logar(user).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	}
+
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Usuarios> Post(@RequestBody Usuarios usuario) {
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(service.CadastrarUsuario(usuario));
+	}
 }

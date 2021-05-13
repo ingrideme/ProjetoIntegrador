@@ -15,5 +15,5 @@ import com.reciclaveis.api.model.Usuarios;
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
 	public List<Usuarios>findByCooperativaTrue();
-	public Optional<Usuarios> findByUsuario(String usuario);
+	public Optional<Usuarios> findByCpfOuCnpj(String cpfOuCnpj);
 }

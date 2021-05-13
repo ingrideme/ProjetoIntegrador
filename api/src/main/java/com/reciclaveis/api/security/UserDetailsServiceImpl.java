@@ -20,7 +20,7 @@ import com.reciclaveis.api.repository.UsuariosRepository;
 		
 		@Override
 		public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-			Optional<Usuarios> user = usuarioRepository.findByUsuario(userName);
+			Optional<Usuarios> user = usuarioRepository.findByCpfOuCnpj(userName);
 			user.orElseThrow(()-> new UsernameNotFoundException(userName + "not found."));
 			
 			return user.map(UserDetailsImpl:: new ).get();
