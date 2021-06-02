@@ -30,6 +30,7 @@ package com.reciclaveis.api.security;
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.authorizeRequests()
+			//.antMatchers("/**").permitAll()
 			.antMatchers("/usuarios/logar").permitAll()
 			.antMatchers("/usuarios/cadastrar").permitAll()
 			.anyRequest().authenticated()
