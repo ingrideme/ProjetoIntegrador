@@ -1,7 +1,4 @@
 package com.reciclaveis.api.service;
-
-
-
 import java.nio.charset.Charset;
 import java.util.Optional;
 
@@ -14,20 +11,29 @@ import com.reciclaveis.api.model.Usuarios;
 import com.reciclaveis.api.model.UsuariosLogin;
 import com.reciclaveis.api.repository.UsuariosRepository;
 
-
 @Service
 public class UsuariosService {
 
 	@Autowired
 	private UsuariosRepository repository;
 
-	public Usuarios CadastrarUsuario(Usuarios usuarios) {
+	/*public Usuarios CadastrarUsuario(Usuarios usuarios) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		String senhaEncoder = encoder.encode(usuarios.getSenha());
 		usuarios.setSenha(senhaEncoder);
 
 		return repository.save(usuarios);
+	}*/
+	public Usuarios cadastrarUsuario(Usuarios novoUsuario) {
+		Optional<Usuarios> usuarioExistente = repository.findByCpfOuCnpj(novoUsuario.getCpfOuCnpj());
+		if(usuarioExistente.isPresent()) {
+			return null;
+		}
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String senhaCriptografada = encoder.encode(novoUsuario.getSenha());
+		novoUsuario.setSenha(senhaCriptografada);
+		return repository.save(novoUsuario);
 	}
 
 	public Optional<UsuariosLogin> Logar(Optional<UsuariosLogin> user) {

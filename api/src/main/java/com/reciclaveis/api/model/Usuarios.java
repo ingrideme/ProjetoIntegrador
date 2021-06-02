@@ -38,7 +38,6 @@ public class Usuarios {
 	@NotNull
 	// @Email
 	@Size(min = 3, max = 45)
-
 	private String email;
 
 	@NotNull
@@ -48,22 +47,18 @@ public class Usuarios {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 
+	private String cooperativa;
+
 	@NotNull
-	private boolean cooperativa;
-	
-	@NotNull
-	@Size(min = 3, max = 20)
+	@Size(min = 3)
 	private String senha;
-	
+
 	@OneToMany(mappedBy = "usuarioCriador", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	private List<Produtos> meusProdutosCriados = new ArrayList<>();
-	
+
 	@ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "vendas",
-			joinColumns = @JoinColumn(name = "comprador_id"),
-			inverseJoinColumns = @JoinColumn(name = "produto_id"))
-	private List<Produtos> meusProdutosComprados =new ArrayList<>();
+	@JoinTable(name = "vendas", joinColumns = @JoinColumn(name = "comprador_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	private List<Produtos> meusProdutosComprados = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -97,11 +92,11 @@ public class Usuarios {
 		this.data = data;
 	}
 
-	public boolean isCooperativa() {
+	public String isCooperativa() {
 		return cooperativa;
 	}
 
-	public void setCooperativa(boolean cooperativa) {
+	public void setCooperativa(String cooperativa) {
 		this.cooperativa = cooperativa;
 	}
 
@@ -136,6 +131,5 @@ public class Usuarios {
 	public void setMeusProdutosComprados(List<Produtos> meusProdutosComprados) {
 		this.meusProdutosComprados = meusProdutosComprados;
 	}
-	
-	
+
 }

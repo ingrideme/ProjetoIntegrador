@@ -3,6 +3,8 @@ package com.reciclaveis.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +32,9 @@ public class UsuariosController {
 	@Autowired
 	private UsuariosRepository usuariosRepository;
 
-	
 	@Autowired
 	private UsuariosService service;
-	
-	
-	
-	
-	
+
 	@GetMapping
 	public ResponseEntity<List<Usuarios>> pegarUsuarios() {
 		return ResponseEntity.ok(usuariosRepository.findAll());
@@ -50,13 +47,21 @@ public class UsuariosController {
 	}
 
 	@GetMapping("/nomeCooperativa")
-	public ResponseEntity<List<Usuarios>> GetByNomeCooperativa() {
-		return ResponseEntity.ok(usuariosRepository.findByCooperativaTrue());
+	public ResponseEntity<Usuarios> GetByNomeCooperativa(@PathVariable String cooperativa) {
+		return usuariosRepository.findByCooperativa(cooperativa).map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
 
-	@PostMapping
-	public ResponseEntity<Usuarios> post(@RequestBody Usuarios usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(usuariosRepository.save(usuario));
+	/*
+	 * @PostMapping("/cadastrar1") public ResponseEntity<Usuarios> post(@RequestBody
+	 * Usuarios usuario) { return
+	 * ResponseEntity.status(HttpStatus.CREATED).body(usuariosRepository.save(
+	 * usuario));
+	 */
+
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Usuarios> post(@Valid @RequestBody Usuarios usuario) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrarUsuario(usuario));
 	}
 
 	@PutMapping
@@ -70,14 +75,9 @@ public class UsuariosController {
 	}
 
 	@PostMapping("/logar")
-	public ResponseEntity<UsuariosLogin> Autentication(@RequestBody Optional<UsuariosLogin> user) {
+	public ResponseEntity<UsuariosLogin> Autentication(@Valid @RequestBody Optional<UsuariosLogin> user) {
 		return service.Logar(user).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
-	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuarios> Post(@RequestBody Usuarios usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(service.CadastrarUsuario(usuario));
-	}
 }
