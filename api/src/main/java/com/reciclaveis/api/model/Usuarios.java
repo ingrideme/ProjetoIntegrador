@@ -44,10 +44,24 @@ public class Usuarios {
 	@Size(min = 12, max = 14) // desconsiderando pontos e traços / duvida front.
 	private String cpfOuCnpj;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date data = new java.sql.Date(System.currentTimeMillis());
+	//@Temporal(TemporalType.TIMESTAMP)
+	//private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	private String cooperativa;
+
+	private String localidade;
+	
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+
+	public String getCooperativa() {
+		return cooperativa;
+	}
 
 	@NotNull
 	@Size(min = 3)
@@ -83,6 +97,8 @@ public class Usuarios {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	/*
 
 	public Date getData() {
 		return data;
@@ -91,7 +107,7 @@ public class Usuarios {
 	public void setData(Date data) {
 		this.data = data;
 	}
-
+*/
 	public String isCooperativa() {
 		return cooperativa;
 	}
