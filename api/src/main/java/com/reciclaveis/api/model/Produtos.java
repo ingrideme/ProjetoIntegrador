@@ -42,13 +42,37 @@ public class Produtos {
 
 	@Temporal(TemporalType.TIMESTAMP)
     private Date data = new java.sql.Date(System.currentTimeMillis());
-
+	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Tipo tipo;
 	
-	//private Integer quantidade;
+	private int quantidade;
 	
+	private int preco;
+	
+	private String fotoProduto;
+			
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+
+	public String getFotoProduto() {
+		return fotoProduto;
+	}
+
+
+	public void setFotoProduto(String fotoProduto) {
+		this.fotoProduto = fotoProduto;
+	}
+
+
 	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "criador")
 	private Usuarios usuarioCriador;
