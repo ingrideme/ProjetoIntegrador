@@ -17,46 +17,47 @@ public class UsuariosService {
 	@Autowired
 	private UsuariosRepository repository;
 
-	/*public Usuarios CadastrarUsuario(Usuarios usuarios) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-		String senhaEncoder = encoder.encode(usuarios.getSenha());
-		usuarios.setSenha(senhaEncoder);
-
-		return repository.save(usuarios);
-	}*/
-	public Usuarios cadastrarUsuario(Usuarios novoUsuario) {
-		Optional<Usuarios> usuarioExistente = repository.findByCpfOuCnpj(novoUsuario.getCpfOuCnpj());
+	
+	//Método para encriptar a senhar antes de salvá-la
+	public Optional<Usuarios> CadastraUsuario(Usuarios usuario) {
+		
+		Optional<Usuarios> usuarioExistente = repository.findByCpfOuCnpj(usuario.getCpfOuCnpj());
+		
+		
 		if(usuarioExistente.isPresent()) {
-			return null;
+			return Optional.empty();
+		}else {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			
+			String senhaEnconder = encoder.encode(usuario.getSenha());
+			usuario.setSenha(senhaEnconder);
+			
+			return Optional.ofNullable(repository.save(usuario));
 		}
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String senhaCriptografada = encoder.encode(novoUsuario.getSenha());
-		novoUsuario.setSenha(senhaCriptografada);
-		return repository.save(novoUsuario);
+		
 	}
-
-	public Optional<UsuariosLogin> Logar(Optional<UsuariosLogin> user) {
-
+	
+	public Optional<UsuariosLogin>Logar(Optional<UsuariosLogin>user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuarios> usuario = repository.findByCpfOuCnpj(user.get().getCpfOuCnpj());
-
-		if (usuario.isPresent()) {
-			if (encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
-
-				String auth = user.get().getCpfOuCnpj() + ":" + user.get().getSenha();
-				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-				String authHeader = "Basic " + new String(encodedAuth);
-
-				user.get().setToken(authHeader);				
+		
+		if(usuario.isPresent()) {
+			if(encoder.matches(user.get().getSenha(),usuario.get().getSenha())) {
+				//Se as duas senhas forem iguais ele retorna elas
+				
+				String auth = user.get().getCpfOuCnpj()+":"+user.get().getSenha();
+				byte[] encondeAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "Basic "+new String(encondeAuth);
+				
+				user.get().setToken(authHeader);
+				user.get().setId(usuario.get().getId());
+				user.get().setCpfOuCnpj(usuario.get().getCpfOuCnpj());
 				user.get().setNomeFisOuJuri(usuario.get().getNomeFisOuJuri());
-				user.get().setSenha(usuario.get().getSenha());
 
+				
 				return user;
-
 			}
 		}
 		return null;
 	}
-
 }

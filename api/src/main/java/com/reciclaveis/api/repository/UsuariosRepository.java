@@ -16,4 +16,5 @@ public interface UsuariosRepository extends JpaRepository<Usuarios, Long> {
 
 	public Optional<Usuarios> findByCooperativa(String cooperativa);
 	public Optional<Usuarios> findByCpfOuCnpj(String cpfOuCnpj);
+	
 }

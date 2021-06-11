@@ -43,114 +43,92 @@ public class Produtos {
 	@Temporal(TemporalType.TIMESTAMP)
     private Date data = new java.sql.Date(System.currentTimeMillis());
 	
-	@ManyToOne
-	@JsonIgnoreProperties("produto")
-	private Tipo tipo;
+	private String tipo;
 	
 	private int quantidade;
 	
 	private int preco;
 	
 	private String fotoProduto;
-			
-	public int getQuantidade() {
-		return quantidade;
-	}
-
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
-
-
-	public String getFotoProduto() {
-		return fotoProduto;
-	}
-
-
-	public void setFotoProduto(String fotoProduto) {
-		this.fotoProduto = fotoProduto;
-	}
-
-
-	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "criador")
-	private Usuarios usuarioCriador;
 	
-	@ManyToMany(mappedBy = "meusProdutosComprados", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	private List<Usuarios> compradores = new ArrayList<>();
 	
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private Usuarios usuarios;
+	
+
+	public Usuarios getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Usuarios usuarios) {
+		this.usuarios = usuarios;
+	}
+
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
-
 
 	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
 
-
 	public float getPeso() {
 		return peso;
 	}
-
 
 	public void setPeso(float peso) {
 		this.peso = peso;
 	}
 
-
 	public Date getData() {
 		return data;
 	}
 
-
 	public void setData(Date data) {
 		this.data = data;
 	}
-	
 
-	public Tipo getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-
-	public void setTipo(Tipo tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-
-	public Usuarios getUsuarioCriador() {
-		return usuarioCriador;
+	public int getQuantidade() {
+		return quantidade;
 	}
 
-
-	public void setUsuarioCriador(Usuarios usuarioCriador) {
-		this.usuarioCriador = usuarioCriador;
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
 
-
-	public List<Usuarios> getCompradores() {
-		return compradores;
+	public int getPreco() {
+		return preco;
 	}
 
-
-	public void setCompradores(List<Usuarios> compradores) {
-		this.compradores = compradores;
+	public void setPreco(int preco) {
+		this.preco = preco;
 	}
 
-	
-	
-		
+	public String getFotoProduto() {
+		return fotoProduto;
+	}
+
+	public void setFotoProduto(String fotoProduto) {
+		this.fotoProduto = fotoProduto;
+	}
+			
+			
 	
 }

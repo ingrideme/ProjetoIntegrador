@@ -11,4 +11,5 @@ import com.reciclaveis.api.model.Produtos;
 //Tudo que a gente vai colocar é o modelo (Produtos e o tipo do ID)
 public interface ProdutosRepository extends JpaRepository<Produtos, Long> {
 
+	//Fazer um listrar por produtos
 }

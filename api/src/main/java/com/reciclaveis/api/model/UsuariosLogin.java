@@ -2,6 +2,8 @@ package com.reciclaveis.api.model;
 
 public class UsuariosLogin {
 	
+	private Long id;
+	
 	private String nomeFisOuJuri;
 	
 	private String cpfOuCnpj;
@@ -9,6 +11,16 @@ public class UsuariosLogin {
 	private String senha;
 	
 	private String token;
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNomeFisOuJuri() {
 		return nomeFisOuJuri;
