@@ -47,10 +47,11 @@ public class Produtos {
 	
 	private int quantidade;
 	
-	private int preco;
+	private float preco;
 	
 	private String fotoProduto;
 	
+	private String descricao;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
@@ -113,11 +114,11 @@ public class Produtos {
 		this.quantidade = quantidade;
 	}
 
-	public int getPreco() {
+	public float getPreco() {
 		return preco;
 	}
 
-	public void setPreco(int preco) {
+	public void setPreco(float preco) {
 		this.preco = preco;
 	}
 
@@ -127,6 +128,14 @@ public class Produtos {
 
 	public void setFotoProduto(String fotoProduto) {
 		this.fotoProduto = fotoProduto;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 			
 			
