@@ -6,12 +6,22 @@ public class UsuariosLogin {
 	
 	private String nomeFisOuJuri;
 	
+	private String fotoUser;
+	
 	private String cpfOuCnpj;
 	
 	private String senha;
 	
 	private String token;
+
 	
+	public String getFotoUser() {
+		return fotoUser;
+	}
+
+	public void setFotoUser(String fotoUser) {
+		this.fotoUser = fotoUser;
+	}
 	
 
 	public Long getId() {

@@ -53,7 +53,7 @@ public class UsuariosService {
 				user.get().setId(usuario.get().getId());
 				user.get().setCpfOuCnpj(usuario.get().getCpfOuCnpj());
 				user.get().setNomeFisOuJuri(usuario.get().getNomeFisOuJuri());
-
+				user.get().setFotoUser(usuario.get().getFotoUser());
 				
 				return user;
 			}

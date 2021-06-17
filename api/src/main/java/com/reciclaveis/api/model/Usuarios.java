@@ -25,6 +25,14 @@ import com.sun.istack.NotNull;
 @Table(name = "tb_usuarios")
 public class Usuarios {
 
+	public List<Produtos> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produtos> produtos) {
+		this.produtos = produtos;
+	}
+
 	// Data Notation para "avisar" pro entity especificações de cada atributo
 	@Id
 	// Notação para gerar automaticamente o id == AUTO_INCREMENT
@@ -35,6 +43,18 @@ public class Usuarios {
 	@Size(min = 3, max = 45)
 	private String nomeFisOuJuri;
 
+
+	private String fotoUser;
+
+	public String getFotoUser() {
+		return fotoUser;
+	}
+
+	public void setFotoUser(String fotoUser) {
+		this.fotoUser = fotoUser;
+	}
+
+	
 	@NotNull
 	// @Email
 	@Size(min = 3, max = 45)
